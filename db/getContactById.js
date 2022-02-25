@@ -1,10 +1,12 @@
-const fs = require("fs/promises");
-const path = require("path");
+const listContacts = require("./listContacts");
 
-const contactsPath = path.join(__dirname, "contacts.json");
-
-function getContactById(contactId) {
-  // ...твой код
+async function getContactById(contactId) {
+  const contacts = await listContacts();
+  const result = contacts.find((item) => item.id === id);
+  if (!result) {
+    return null;
+  }
+  return result;
 }
 
 module.exports = getContactById;

@@ -3,8 +3,10 @@ const path = require("path");
 
 const contactsPath = path.join(__dirname, "contacts.json");
 
-function listContacts() {
-  // ...твой код
+async function listContacts() {
+  const data = await fs.readFile(`${__dirname}/contacts.json`);
+  const contacts = JSON.parse;
+  return contacts;
 }
 
 module.exports = listContacts;

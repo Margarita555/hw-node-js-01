@@ -1,18 +1,15 @@
-const fs = require("fs/promises");
-const path = require("path");
-
-const contactsPath = path.join(__dirname, "contacts.json");
-
-// fs.readFile(`${__dirname}/contacts.json`);
-
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      // ...
+      const contacts = await contactsOperations.listContacts();
       break;
 
     case "get":
-      // ... id
+      const contact = await contactsOperations.getById(id);
+      console.log(contact);
+      if (!contact) {
+        throw new Error(`Contact with id ${id} not found`);
+      }
       break;
 
     case "add":
@@ -29,3 +26,5 @@ function invokeAction({ action, id, name, email, phone }) {
 }
 
 invokeAction(argv);
+const id = "";
+invokeAction({ action: "getById", id });
