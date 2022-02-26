@@ -1,11 +1,11 @@
 const fs = require("fs/promises");
-const path = require("path");
 
-const contactsPath = path.join(__dirname, "contacts.json");
+const filePath = require("./filePath");
 
 async function listContacts() {
-  const data = await fs.readFile(`${__dirname}/contacts.json`);
-  const contacts = JSON.parse;
+  const data = await fs.readFile(filePath);
+  const contacts = JSON.parse(data);
+  // console.log(contacts);
   return contacts;
 }
 
