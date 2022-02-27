@@ -1,13 +1,12 @@
 const { v4 } = require("uuid");
-const fs = require("fs/promises");
 const listContacts = require("./listContacts");
-const filePath = require("./filePath");
+const updateContacts = require("./updateContacts");
 
-async function addContact(name, email, phone) {
+async function addContact(data) {
   const contacts = await listContacts();
   const newContact = { ...data, id: v4() };
   contacts.push(newContact);
-  await fs.writeFile(filePath, JSON.stringify(contacts));
+  await updateContacts(contacts);
   return newContact;
 }
 
