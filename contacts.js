@@ -1,9 +1,12 @@
+const yargs = require("yargs");
+const { hideBin } = require("yargs/helpers");
 const contactsOperations = require("./db");
+
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       const contacts = await contactsOperations.listContacts();
-      // console.log(contacts);
+      console.log(contacts);
       break;
 
     case "get":
@@ -15,7 +18,7 @@ async function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case "add":
-      const newContact = await contactsOperations.addContact(newData);
+      const newContact = await contactsOperations.addContact(name, email, phone);
       console.log(newContact);
       break;
 
@@ -29,16 +32,9 @@ async function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
-// invokeAction(argv);
-// invokeAction({ action: "list" });
-// const id = "2";
-// invokeAction({ action: "get", id });
-const newData = {
-  name: "Alla Ray",
-  email: "mulla.ante@vestibul.co.uk",
-  phone: "(992) 817-3792",
-};
-// invokeAction({ action: "add", newData });
+const arr = hideBin(process.argv);
+const { argv } = yargs(arr);
+console.log(argv);
+invokeAction(argv);
 
-const id = "033d9f7e-a9a4-4a3a-a2c4-61a7118be0b5";
-invokeAction({ action: "remove", id });
+module.exports = invokeAction;
